@@ -2,6 +2,8 @@ import * as path from 'path';
 import slash from 'slash';
 import * as vscode from 'vscode';
 
+import { isValidUrl } from '../webviews/components/fieldValidators';
+
 import { Shell } from '../../util/shell';
 import { FileDiffQueryParams } from '../../views/pullrequest/diffViewHelper';
 import { PullRequestNodeDataProvider } from '../../views/pullRequestNodeDataProvider';
@@ -92,6 +94,11 @@ export abstract class CommandBase {
      * Open a URL in the default browser.
      */
     protected openUrl(url: string): void {
+        if (!isValidUrl(url)) {
+            vscode.window.showErrorMessage(`Invalid URL: ${url}`);
+            return;
+        }
+        
         const uri = vscode.Uri.parse(url);
         vscode.env.openExternal(uri);
     }

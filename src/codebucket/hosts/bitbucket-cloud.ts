@@ -10,7 +10,8 @@ export class BitbucketCloudSite extends BitbucketSiteBase {
 
     public getChangeSetUrl(revision: string, filePath: string): string {
         const { ownerSlug, repoSlug } = this.site;
-        return `${this.site.details.baseLinkUrl}/${ownerSlug}/${repoSlug}/commits/${revision}#chg-${filePath}`;
+        const url = `${this.site.details.baseLinkUrl}/${ownerSlug}/${repoSlug}/commits/${revision}#chg-${filePath}`;
+        return url;
     }
 
     public getSourceUrl(revision: string, filePath: string, lineRanges: string[]) {

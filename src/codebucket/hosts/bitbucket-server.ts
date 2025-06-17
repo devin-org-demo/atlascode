@@ -8,9 +8,8 @@ export class BitbucketServerSite extends BitbucketSiteBase {
 
     public getChangeSetUrl(revision: string, filePath: string): string {
         const { ownerSlug, repoSlug } = this.site;
-        return `${
-            this.site.details.baseLinkUrl
-        }/projects/${ownerSlug}/repos/${repoSlug}/commits/${revision}#${encodeURIComponent(filePath)}`;
+        const url = `${this.site.details.baseLinkUrl}/projects/${ownerSlug}/repos/${repoSlug}/commits/${revision}#${encodeURIComponent(filePath)}`;
+        return url;
     }
 
     public getSourceUrl(revision: string, filePath: string, lineRanges: string[]): string {
