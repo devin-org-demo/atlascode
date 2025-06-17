@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 
 import { clientForSite } from '../../bitbucket/bbUtils';
 import { Commit, PullRequest } from '../../bitbucket/model';
+import { Commands } from '../../constants';
 import { Logger } from '../../logger';
 import { createFileChangesNodes } from '../pullrequest/diffViewHelper';
 import { AbstractBaseNode } from './abstractBaseNode';
@@ -24,6 +25,11 @@ export class CommitNode extends AbstractBaseNode {
         item.description = this.commit.message;
         item.tooltip = this.commit.message;
         item.resourceUri = vscode.Uri.parse(this.commit.url);
+        item.command = {
+            command: Commands.ViewInWebBrowser,
+            title: 'View Commit in Browser',
+            arguments: [this],
+        };
         return item;
     }
 
